@@ -29,23 +29,3 @@ else
     echo "dotfiles already exists"
     exit 1
 fi
-
-# Macなら普通のbrew、WSLならLinux-brewを入れる処理をする箇所
-if [ "$(uname)" == 'Darwin' ]; then
-  echo 'Install brew [Mac]'
-  /usr/local/bin/ -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  echo 'Install modules only for Mac'
-  ~/dotfiles/init/setup/mac.sh
-	$ sudo vi /etc/shells
-
-elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
-	# ~/dotfiles/init/setup/wsl.sh
-  sudo apt-get update
-  sudo apt-get install zsh
-  chsh -s /bin/zsh
-
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-  echo 'Install brew [Linux]'
-else
-  exit 1
-fi
