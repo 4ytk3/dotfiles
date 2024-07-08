@@ -1,5 +1,4 @@
 #!/bin/bash
-
 DOT_DIR="$HOME/dotfiles"
 
 has() {
@@ -9,6 +8,16 @@ has() {
 if [ ! -d ${DOT_DIR} ]; then
     if has "git"; then
         git clone https://github.com/4ytk3/dotfiles.git ${DOT_DIR}
+	elif has "curl" || has "wget"; then
+	        TARBALL="https://github.com/4ytk3/dotfiles/archive/main.tar.gz"
+	        if has "curl"; then
+	            curl -L ${TARBALL} -o main.tar.gz
+	        else
+	            wget ${TARBALL}
+	        fi
+	        tar -zxvf main.tar.gz
+	        rm -f main.tar.gz
+	        mv -f dotfiles-main "${DOT_DIR}"
     else
         echo "git required"
         exit 1
@@ -29,3 +38,33 @@ else
     echo "dotfiles already exists"
     exit 1
 fi
+
+# for Mac, WSL, Linux
+if [ "$(uname)" == 'Darwin' ]; then
+  # for Mac
+  $DOT_DIR/dotfiles/init/mac.sh
+elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
+  # for WSL
+	$DOT_DIR/dotfiles/init/wsl.sh
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  # for linux
+  :
+else
+  exit 1
+fi
+
+# shell change to zsh
+chsh -s $(which zsh)
+
+# oh-my-zsh
+sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# zsh plugins
+$DOT_DIR/dotfiles/init/zsh_plugins.sh
+
+# git
+git config --global user.4ytk3 [任意のユーザ名]
+git config --global user.nuts13718@gmail.com [任意のユーザ名]
+
+# font install
+$DOT_DIR/dotfiles/init/font.sh
