@@ -1,3 +1,4 @@
+# command
 abbr la 'ls --color'
 abbr ll 'ls -lhC'
 abbr md 'mkdir'
