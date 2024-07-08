@@ -3,10 +3,12 @@ if [ "$(uname -m)" = "arm64" ] ; then
   eval "$(/opt/homebrew/bin/brew shellenv)" > /dev/null
 fi
 
+# install zsh
 brew install zsh
 sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
-chsh -s /usr/local/bin/zsh
 
+# brew
 brew bundle --global
 
+# asdf
 echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
