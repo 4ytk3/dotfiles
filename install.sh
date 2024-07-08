@@ -62,9 +62,5 @@ sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/maste
 # zsh plugins
 $DOT_DIR/dotfiles/init/zsh_plugins.sh
 
-# git
-git config --global user.4ytk3 [任意のユーザ名]
-git config --global user.nuts13718@gmail.com [任意のユーザ名]
-
 # font install
 $DOT_DIR/dotfiles/init/font.sh
