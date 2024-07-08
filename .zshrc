@@ -124,56 +124,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# command
-abbr ls='ls --color=auto'
-abbr la='ls -a'
-abbr ll='ls -lhC'
-abbr md='mkdir'
-abbr o='open'
-abbr pc='pwd | c'
-abbr sc='source ~/.zshrc'
-abbr st='source ~/.tmux.conf'
-abbr ~='cd ~'
-abbr dot='~/.dotfiles'
-abbr ..2='cd ../..'
-abbr ..3='cd ../..'
-abbr ..4='cd ../..'
-abbr ..5='cd ../..'
-abbr vz='vim ~/.zshrc'
-abbr vt='vim ~/.tmux.conf'
-
-# apt
-abbr agi='sudo apt install'
-abbr agr='sudo apt remove'
-abbr agu='sudo apt update'
-
-# tools
-abbr ag='sudo apt'
-abbr -g c='xsel --clipboard --input'
-abbr d='docker'
-abbr g='git'
-abbr h='history'
-abbr t='tmux'
-abbr v='vim'
-
-# git
-abbr gl='git pull'
-abbr ga='git add'
-abbr gac='git add -A && git commit'
-abbr gc='git commit'
-abbr gcm='git commit -m'
-abbr gco='git checkout'
-abbr gcb='git checkout -b'
-abbr gp='git push'
-abbr gs='git status'
-abbr gb='git branch'
-abbr gd='git diff'
-abbr glg='git log'
-abbr ggr='git grep'
-abbr gsw='git switch'
-abbr gget='ghq get'
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
