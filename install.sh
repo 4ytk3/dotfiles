@@ -45,7 +45,7 @@ if [ "$(uname)" == 'Darwin' ]; then
   $DOT_DIR/dotfiles/init/mac.sh
 elif [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   # for WSL
-	$DOT_DIR/dotfiles/init/wsl.sh
+　　　　$DOT_DIR/dotfiles/init/wsl.sh
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   # for linux
   :
