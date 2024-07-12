@@ -61,7 +61,7 @@ chsh -s $(which zsh)
 # oh-my-zsh
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# zsh plugins
+# install zsh plugins
 $DOT_DIR/init/zsh_plugins.sh
 
 # install font
