@@ -8,21 +8,22 @@ has() {
 if [ ! -d ${DOT_DIR} ]; then
     if has "git"; then
         git clone https://github.com/4ytk3/dotfiles.git ${DOT_DIR}
-	elif has "curl" || has "wget"; then
-	        TARBALL="https://github.com/4ytk3/dotfiles/archive/main.tar.gz"
-	        if has "curl"; then
-	            curl -L ${TARBALL} -o main.tar.gz
-	        else
-	            wget ${TARBALL}
-	        fi
-	        tar -zxvf main.tar.gz
-	        rm -f main.tar.gz
-	        mv -f dotfiles-main "${DOT_DIR}"
+    elif has "curl" || has "wget"; then
+	TARBALL="https://github.com/4ytk3/dotfiles/archive/main.tar.gz"
+	if has "curl"; then
+	    curl -L ${TARBALL} -o main.tar.gz
+	else
+	    wget ${TARBALL}
+	fi
+	tar -zxvf main.tar.gz
+	rm -f main.tar.gz
+	mv -f dotfiles-main "${DOT_DIR}"
     else
         echo "git required"
         exit 1
     fi
     cd ${DOT_DIR}
+
     for f in *
     do
         [[ "$f" == ".git" ]] && continue
