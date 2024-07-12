@@ -1,6 +1,4 @@
 tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-versions"
 tap "homebrew/core"
 
 brew "curl"
@@ -11,3 +9,4 @@ brew "wget"
 brew "fzf"
 brew "ghq"
 brew "tmux"
+brew "font-hackgen-nerd"
