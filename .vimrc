@@ -2,6 +2,9 @@
 set nocompatible              " Vi互換モードを無効にする
 syntax on                     " シンタックスハイライトを有効にする
 set encoding=utf-8            " 文字コードをutf-8に設定する
+set nobackup                  " バックアップファイルを作らない
+set noswapfile                " スワップファイルを作らない
+set autoread                  " 編集中のファイルが変更されたら自動で再読み込み
 set number                    " 行番号を表示する
 set tabstop=4                 " タブをスペース4つ分に設定
 set shiftwidth=4              " 自動インデントで使用するスペースの数
@@ -13,12 +16,16 @@ set incsearch                 " インクリメンタル検索を有効にする
 set ignorecase                " 検索時に大文字小文字を無視する
 set smartcase                 " 検索パターンに大文字が含まれる場合はignorecaseを無視する
 set clipboard=unnamedplus     " システムクリップボードを使用する
-set hidden                    " バッファを放棄するときに隠れ状態にする
+set hidden                    " バッファが編集中でもその他のファイルを開けるようにする
 set cursorline                " 現在の行をハイライトする
+set cursorcolumn              " 現在の行をハイライトする（縦）
 set showmatch                 " 対応する括弧をハイライトする
+set virtualedit=onemore        " 行末の1文字先までカーソルを移動できるようにする
+set visualbell                 " ビープ音を可視化する
 set showcmd                   " コマンドを画面の最下行に表示する 
 set wildmenu                  " コマンドライン補完を有効にする
 set wildmode=list:longest     " コマンドライン補完モード
+nmap <Esc><Esc> :nohlsearch<CR><Esc> " Esc連打でハイライト解除
 
 set background=dark           " 背景色を暗く設定する
 set termguicolors             " 24ビットRGBカラーを有効にする
