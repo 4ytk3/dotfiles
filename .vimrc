@@ -1,6 +1,7 @@
-"setting"
+" setting
 set nocompatible              " Vi互換モードを無効にする
 syntax on                     " シンタックスハイライトを有効にする
+set encoding=utf-8            " 文字コードをutf-8に設定する
 set number                    " 行番号を表示する
 set tabstop=4                 " タブをスペース4つ分に設定
 set shiftwidth=4              " 自動インデントで使用するスペースの数
@@ -12,8 +13,10 @@ set incsearch                 " インクリメンタル検索を有効にする
 set ignorecase                " 検索時に大文字小文字を無視する
 set smartcase                 " 検索パターンに大文字が含まれる場合はignorecaseを無視する
 set clipboard=unnamedplus     " システムクリップボードを使用する
+set hidden                    " バッファを放棄するときに隠れ状態にする
 set cursorline                " 現在の行をハイライトする
 set showmatch                 " 対応する括弧をハイライトする
+set showcmd                   " コマンドを画面の最下行に表示する 
 set wildmenu                  " コマンドライン補完を有効にする
 set wildmode=list:longest     " コマンドライン補完モード
 
@@ -35,7 +38,7 @@ set foldlevelstart=99         " デフォルトでほとんどの折り畳みを
 
 filetype plugin indent on
 
-"plugins"
+" plugins
 packadd vim-jetpack
 call jetpack#begin()
 Jetpack 'tani/vim-jetpack', {'opt': 1} "bootstrap
