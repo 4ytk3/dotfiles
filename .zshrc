@@ -127,3 +127,4 @@ source $ZSH/oh-my-zsh.sh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 eval "$(starship init zsh)"
+export PATH="/home/nakasone/.asdf/installs/poetry/1.8.3/bin:$PATH"
