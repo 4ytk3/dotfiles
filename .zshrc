@@ -75,24 +75,23 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	zsh-completions
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	web-search
-	zsh-abbr
-	github
-	docker
-	aliases
-	history
-	copypath
-	asdf
+    git
+    zsh-completions
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    web-search
+    zsh-abbr
+    github
+    docker
+    aliases
+    history
+    copypath
+    asdf
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME=""
 ZSH_THEME="powerlevel10k/powerlevel10k"
 source $ZSH/oh-my-zsh.sh
 # User configuration
