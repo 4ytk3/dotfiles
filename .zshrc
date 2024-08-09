@@ -128,3 +128,7 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 eval "$(starship init zsh)"
 export PATH="/home/nakasone/.asdf/installs/poetry/1.8.3/bin:$PATH"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+. /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
