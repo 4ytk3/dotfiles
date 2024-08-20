@@ -76,6 +76,9 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+    zsh-completions
+    zsh-autosuggestions
+    zsh-syntax-highlighting
     web-search
     zsh-abbr
     github
@@ -83,10 +86,13 @@ plugins=(
     aliases
     history
     copypath
+    asdf
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source $ZSH/oh-my-zsh.sh
 # User configuration
 
 #export MANPATH="/usr/local/man:$MANPATH"
@@ -116,24 +122,17 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-
-[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
-eval "$(sheldon source)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 export PATH="/home/nakasone/.asdf/installs/poetry/1.8.3/bin:$PATH"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-autoload -U compinit
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
-export LESSHISTFILE=-
-export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 
-export ABBR_USER_ABBREVIATIONS_FILE="$HOME/.config/zsh/.abbreviations"
-source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
 . /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
