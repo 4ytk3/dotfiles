@@ -43,3 +43,9 @@ export LANG="en_US.UTF-8"
 # Set abbreviations file location
 export ABBR_USER_ABBREVIATIONS_FILE="$HOME/.config/zsh/.abbreviations"
 
+# Python
+export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}python/pythonstartup.py"
+export FLET_HOME="$XDG_DATA_HOME/flet"
+
+# QT
+export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/qt5/plugins

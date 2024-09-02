@@ -33,3 +33,10 @@ autoload -U compinit
 
 # alias
 alias vim='vim -u $XDG_CONFIG_HOME/vim/vimrc'
+
+# fda - including hidden directories
+fda() {
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
