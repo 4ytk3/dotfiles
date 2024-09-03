@@ -1,0 +1,136 @@
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_DATA_HOME/vim
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
+
+set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
+set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
+
+let g:netrw_home = $XDG_DATA_HOME."/vim"
+call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
+set viewdir=$XDG_DATA_HOME/vim/view | call mkdir(&viewdir, 'p')
+
+set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p')
+set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p')
+set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
+
+if !has('nvim') | set viminfofile=$XDG_STATE_HOME/vim/viminfo | endif
+
+if !empty($XDG_CACHE_HOME)
+  set verbosefile=$XDG_CACHE_HOME/vim/vimlog.txt
+else
+  set verbosefile=$HOME/.cache/vim/vimlog.txt
+endif
+
+" setting
+set nocompatible              " Vi互換モードを無効にする
+set backspace=indent,eol,start " バックスペースを有効にする
+syntax on                     " シンタックスハイライトを有効にする
+set encoding=utf-8            " 文字コードをutf-8に設定する
+set nobackup                  " バックアップファイルを作らない
+set noswapfile                " スワップファイルを作らない
+set autoread                  " 編集中のファイルが変更されたら自動で再読み込み
+set number                    " 行番号を表示する
+set tabstop=4                 " タブをスペース4つ分に設定
+set shiftwidth=4              " 自動インデントで使用するスペースの数
+set expandtab                 " タブの代わりにスペースを使用する
+set autoindent                " 新しい行で現在の行のインデントをコピーする
+set smartindent               " 新しい行でスマートインデントを有効にする
+set hlsearch                  " 検索結果をハイライトする
+set incsearch                 " インクリメンタル検索を有効にする
+set ignorecase                " 検索時に大文字小文字を無視する
+set smartcase                 " 検索パターンに大文字が含まれる場合はignorecaseを無視する
+set clipboard=unnamedplus     " システムクリップボードを使用する
+set hidden                    " バッファが編集中でもその他のファイルを開けるようにする
+set cursorline                " 現在の行をハイライトする
+set cursorcolumn              " 現在の行をハイライトする（縦）
+set showmatch                 " 対応する括弧をハイライトする
+set virtualedit=onemore        " 行末の1文字先までカーソルを移動できるようにする
+set visualbell                 " ビープ音を可視化する
+set showcmd                   " コマンドを画面の最下行に表示する 
+set wildmenu                  " コマンドライン補完を有効にする
+set wildmode=list:longest     " コマンドライン補完モード
+nmap <Esc><Esc> :nohlsearch<CR><Esc> " Esc連打でハイライト解除
+
+set background=dark           " 背景色を暗く設定する
+set termguicolors             " 24ビットRGBカラーを有効にする
+set cmdheight=2               " コマンドラインの高さを2行にする
+set laststatus=2              " 常にステータスラインを表示する
+set ruler                     " カーソル位置の行と列番号を表示する
+
+set mouse=a                   " マウスサポートを有効にする
+set splitbelow                " 水平方向の分割を下に設定する
+set splitright                " 垂直方向の分割を右に設定する
+set wrap                      " 行の折り返しを有効にする
+set linebreak                 " 単語の途中で折り返さないようにする
+set showbreak=>>>             " 折り返し部分の表示を設定する
+set foldmethod=syntax         " シンタックスに基づいて折り畳みを設定する
+set foldlevelstart=99         " デフォルトでほとんどの折り畳みを開く
+
+filetype plugin indent on
+
+" plugins
+packadd vim-jetpack
+let g:jetpack#dir = $XDG_DATA_HOME . '/vim'
+call jetpack#begin(g:jetpack#dir)
+Jetpack 'tani/vim-jetpack', {'opt': 1} "bootstrap
+Jetpack 'https://github.com/dense-analysis/ale'
+Jetpack 'junegunn/fzf'
+Jetpack 'junegunn/fzf.vim'
+Jetpack 'neoclide/coc.nvim', { 'branch': 'release' }
+Jetpack 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
+Jetpack 'vlime/vlime', { 'rtp': 'vim' }
+Jetpack 'dracula/vim', { 'as': 'dracula' }
+Jetpack 'tpope/vim-fireplace', { 'for': 'clojure' }
+Jetpack 'lambdalisue/vim-fern'
+Jetpack 'lambdalisue/fern-git-status.vim'
+Jetpack 'lambdalisue/nerdfont.vim'
+Jetpack 'lambdalisue/fern-renderer-nerdfont.vim'
+Jetpack 'lambdalisue/glyph-palette.vim'
+Jetpack 'airblade/vim-gitgutter'
+Jetpack 'cocopon/iceberg.vim'
+Jetpack 'gkeep/iceberg-dark'
+Jetpack 'vim-airline/vim-airline'
+Jetpack 'vim-airline/vim-airline-themes'
+Jetpack 'itchyny/lightline.vim'
+call jetpack#end()
+" Automatic installation on startup
+let s:jetpackfile = $XDG_DATA_HOME . '/vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+if !filereadable(s:jetpackfile)
+      call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
+endif
+" Automatic plugin installation on startup
+for name in jetpack#names()
+    if !jetpack#tap(name)
+        call jetpack#sync()
+        break
+    endif
+endfor
+
+" fern
+nnoremap <C-n> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+let g:fern#renderer = 'nerdfont'
+let g:fern#default_hidden = 1
+" アイコンに色をつける
+augroup my-glyph-palette
+    autocmd! *
+    autocmd FileType fern call glyph_palette#apply()
+    autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
+
+" colorscheme
+colorscheme iceberg
+let g:lightline = { 'colorscheme': 'icebergDark' }
+let g:airline_theme='icebergDark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+set laststatus=2
+if !has('gui_running')
+      set t_Co=256
+endif
+
+highlight Normal guibg=NONE ctermbg=NONE
+highlight NonText guibg=NONE ctermbg=NONE
+highlight LineNr guibg=NONE ctermbg=NONE
+highlight Folded guibg=NONE ctermbg=NONE
+highlight EndOfBuffer guibg=NONE ctermbg=NONE
