@@ -9,6 +9,11 @@ ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Zsh history file location
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
+(( HISTSIZE = (2 ** 31) - 1 ))   # Number of history can be saved in memory
+(( SAVEHIST = (2 ** 31) - 1 ))   # Number of history can be saved in HISTFILE
+setopt INC_APPEND_HISTORY        # Write to the history file immediastely, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 
 # Set Wget configuration file location
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
