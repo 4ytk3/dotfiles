@@ -16,8 +16,11 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 eval "$(sheldon source)"
 
 # Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
+if [[ "$(uname -s)" == Linux* ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ "$(uname)" == "Darwin" ]]; then
+  eval "(/usr/local/bin/brew shellenv)"
+fi
 # Starship
 eval "$(starship init zsh)"
 
@@ -25,8 +28,8 @@ eval "$(starship init zsh)"
 export PATH="/home/nakasone/.asdf/installs/poetry/1.8.3/bin:$PATH"
 
 # Zsh completion setup
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 autoload -U compinit
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 # fzf configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -39,4 +42,3 @@ fda() {
   local dir
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
-
