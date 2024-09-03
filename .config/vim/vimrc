@@ -65,6 +65,7 @@ set linebreak                 " 単語の途中で折り返さないようにす
 set showbreak=>>>             " 折り返し部分の表示を設定する
 set foldmethod=syntax         " シンタックスに基づいて折り畳みを設定する
 set foldlevelstart=99         " デフォルトでほとんどの折り畳みを開く
+set clipboard+=unnamed        " クリップボードを有効
 
 filetype plugin indent on
 
