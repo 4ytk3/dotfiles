@@ -32,6 +32,7 @@ abbr v='vim'
 
 # git
 abbr gl='git pull'
+abbr gloh='git pull origin HEAD'
 abbr ga='git add'
 abbr ga.='git add .'
 abbr gac='git add -A && git commit'
