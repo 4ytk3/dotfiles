@@ -48,6 +48,15 @@ export LANG="en_US.UTF-8"
 # Set abbreviations file location
 export ABBR_USER_ABBREVIATIONS_FILE="$HOME/.config/zsh/.abbreviations"
 
+# Android
+export ANDROID_HOME="$XDG_CONFIG_HOME/Android/SDK"
+export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
+# java
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
+export PATH="$PATH:$JAVA_HOME/bin"
+
 # Python
 export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}python/pythonstartup.py"
 export FLET_HOME="$XDG_DATA_HOME/flet"
