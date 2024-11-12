@@ -34,9 +34,7 @@ export ASDF_DIR="$XDG_DATA_HOME/asdf"
 export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/asdfrc"
 export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=".tool_versions"
-
-# Set PATH
-export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
+export PATH="$ASDF_DIR/bin:$ASDF_DIR/shims:$PATH"
 
 # Set the preferred editor
 export EDITOR='vim'
