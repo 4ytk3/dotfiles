@@ -31,7 +31,7 @@ if [ ! -d ${DOT_DIR} ]; then
         [[ "$f" == ".DS_Store" ]] && continue
         [[ "$f" == "README.md" ]] && continue
         [[ "$f" == "install.sh" ]] && continue
-        [[ "$f" == "init"]] && continue
+        [[ "$f" == "init" ]] && continue
 
         ln -snf $DOT_DIR/"$f" $HOME/".$f"
         echo "Installed .$f"
