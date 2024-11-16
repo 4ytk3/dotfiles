@@ -61,3 +61,6 @@ export FLET_HOME="$XDG_DATA_HOME/flet"
 
 # QT
 export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/qt5/plugins
+
+# flutter
+export PATH="$HOME/flutter/bin:$PATH"
