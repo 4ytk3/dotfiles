@@ -29,6 +29,11 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 # Set .NET CLI home
 export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
 
+# CUDA
+export CUDA_PATH=/usr/local/cuda-12.6
+export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64:${LD_LIBRARY_PATH}
+export PATH=/usr/local/cuda-12.6/bin:${PATH}
+
 # ASDF settings
 export ASDF_DIR="$XDG_DATA_HOME/asdf"
 export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"

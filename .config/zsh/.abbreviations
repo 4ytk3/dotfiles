@@ -51,3 +51,13 @@ abbr glg='git log'
 abbr ggr='git grep'
 abbr gsw='git switch'
 abbr gget='ghq get'
+
+# python
+abbr prp='poetry run python'
+abbr pi='poetry init'
+abbr pa='poetry add'
+
+# ASDF
+abbr apa='asdf plugin add'
+abbr ai='asdf install'
+abbr al='asdf local'
