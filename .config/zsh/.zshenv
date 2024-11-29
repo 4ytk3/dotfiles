@@ -52,7 +52,7 @@ export LANG="en_US.UTF-8"
 export ABBR_USER_ABBREVIATIONS_FILE="$HOME/.config/zsh/.abbreviations"
 
 # Android
-export ANDROID_HOME="$XDG_CONFIG_HOME/Android/SDK"
+export ANDROID_HOME="Library/Android/SDK"
 export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
