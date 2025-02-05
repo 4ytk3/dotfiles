@@ -19,7 +19,7 @@ eval "$(sheldon source)"
 if [[ "$(uname -s)" == Linux* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 elif [[ "$(uname)" == "Darwin" ]]; then
-  eval "(/usr/local/bin/brew shellenv)"
+  eval "$(/usr/local/bin/brew shellenv)"
 fi
 # Starship
 eval "$(starship init zsh)"
