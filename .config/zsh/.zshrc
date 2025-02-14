@@ -1,3 +1,10 @@
+# Homebrew
+if [[ "$(uname -s)" == Linux* ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ "$(uname)" == "Darwin" ]]; then
+  eval "(/usr/local/bin/brew shellenv)"
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -15,12 +22,6 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # Plugin management
 eval "$(sheldon source)"
 
-# Homebrew
-if [[ "$(uname -s)" == Linux* ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [[ "$(uname)" == "Darwin" ]]; then
-  eval "(/usr/local/bin/brew shellenv)"
-fi
 # Starship
 eval "$(starship init zsh)"
 
