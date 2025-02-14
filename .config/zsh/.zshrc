@@ -22,6 +22,15 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # Plugin management
 eval "$(sheldon source)"
 
+<<<<<<< HEAD
+=======
+# Homebrew
+if [[ "$(uname -s)" == Linux* ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ "$(uname)" == "Darwin" ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+>>>>>>> refs/remotes/origin/main
 # Starship
 eval "$(starship init zsh)"
 
