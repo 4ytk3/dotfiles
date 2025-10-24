@@ -1,5 +1,7 @@
 [user]
-  name = 4ytk3
-  email = nuts13718@gmail.com
+	name = nakasone
+	email = nuts13718@gmail.com
 [init]
 	defaultBranch = main
+[ghq]
+	root = /home/nakasone/ghq
