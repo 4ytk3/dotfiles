@@ -1,47 +1,53 @@
-# Homebrew
-if [[ "$(uname -s)" == Linux* ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [[ "$(uname)" == "Darwin" ]]; then
-  eval "$(/usr/local/bin/brew shellenv)"
-fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config//zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Load Powerlevel10k configuration
-[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh
+# Core shell options
+setopt INC_APPEND_HISTORY SHARE_HISTORY HIST_IGNORE_DUPS
 
-# Load Powerlevel10k theme
-source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+# Ensure cache/state dirs exist (harmless if already present)
+mkdir -p "$XDG_CACHE_HOME/zsh" "$XDG_STATE_HOME/zsh" >/dev/null 2>&1
 
-# Disable instant prompt for compatibility reasons
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-
-# Plugin management
-eval "$(sheldon source)"
-
-# Starship
-eval "$(starship init zsh)"
-
-# asdf
-export PATH="/home/nakasone/.asdf/installs/poetry/1.8.3/bin:$PATH"
-
-# Zsh completion setup
+# Completion setup (cache under XDG)
 autoload -U compinit
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
-# fzf configuration
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# OS detection helpers
+is_macos() { [[ "$OSTYPE" == darwin* ]]; }
+is_wsl()   { grep -qi microsoft /proc/version 2>/dev/null; }
 
-# alias
+# Load OS-specific overlay
+if is_macos && [[ -r "$ZDOTDIR/os/darwin.zsh" ]]; then
+  source "$ZDOTDIR/os/darwin.zsh"
+elif is_wsl && [[ -r "$ZDOTDIR/os/wsl.zsh" ]]; then
+  source "$ZDOTDIR/os/wsl.zsh"
+fi
+
+# Activate asdf if installed (no Homebrew dependency)
+if [ -d "$ASDF_DATA_DIR" ]; then
+#   [ -f "$ASDF_DATA_DIR/asdf.sh" ] && . "$ASDF_DATA_DIR/asdf.sh"
+#   [ -f "$ASDF_DATA_DIR/completions/asdf.zsh" ] && . "$ASDF_DATA_DIR/completions/asdf.zsh"
+fi
+
+# Powerlevel10k (optional)
+if [[ -r "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+[[ -r "$ZDOTDIR/.p10k.zsh" ]] && source "$ZDOTDIR/.p10k.zsh"
+[[ -r "$XDG_DATA_HOME/powerlevel10k/powerlevel10k.zsh-theme" ]] && \
+  source "$XDG_DATA_HOME/powerlevel10k/powerlevel10k.zsh-theme"
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
+# Plugin managers (load only if available)
+command -v sheldon >/dev/null 2>&1 && eval "$(sheldon source)"
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
+
+# fzf integration (optional)
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+
+# Aliases and small helpers
 alias vim='vim -u $XDG_CONFIG_HOME/vim/vimrc'
-
-# fda - including hidden directories
-fda() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
-
-. ${XDG_DATA_HOME}/asdf/asdf.sh
+fda() { local d; d=$(find "${1:-.}" -type d 2>/dev/null | fzf +m) && cd "$d"; }
