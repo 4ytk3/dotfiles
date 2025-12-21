@@ -35,15 +35,10 @@ fi
 export ASDF_DIR="$ASDF_DATA_DIR"
 [ -d "$ASDF_DIR/shims" ] && PATH="$ASDF_DIR/shims:$PATH"
 
+# Python/Flet environment
+export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/python/pythonstartup.py"
 export FLET_HOME="$XDG_DATA_HOME/flet"
 
+. "$HOME/.cargo/env"
+
 export ABBR_USER_ABBREVIATIONS_FILE="$XDG_CONFIG_HOME/zsh/.abbreviations"
-
-# Go workspace
-export GOPATH="${GOPATH:-$HOME/go}"
-export PATH="$GOPATH/bin:$PATH"
-
-# Cargo/Rustup under XDG
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-export PATH="$CARGO_HOME/bin:$PATH"
