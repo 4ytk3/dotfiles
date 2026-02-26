@@ -42,8 +42,8 @@ fi
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 # Plugin managers (load only if available)
-command -v sheldon >/dev/null 2>&1 && eval "$(sheldon source)"
-command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
+source ${XDG_DATA_HOME:-$HOME/.local/share}/antidote/antidote.zsh
+antidote load "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/.zsh_plugins.txt"
 
 # fzf integration (optional)
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
