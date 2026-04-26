@@ -1,0 +1,35 @@
+# XDG base directories
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+
+# Place zsh configs under XDG
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Shell history configuration
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+export HISTSIZE=50000
+export SAVEHIST=50000
+
+# Lightweight defaults (safe for non-interactive shells)
+export EDITOR="vim"
+export LANG="${LANG:-en_US.UTF-8}"
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export LESSHISTFILE=-
+
+export FLET_HOME="$XDG_DATA_HOME/flet"
+export ABBR_USER_ABBREVIATIONS_FILE="$XDG_CONFIG_HOME/zsh/.abbreviations"
+
+# Go workspace
+export GOPATH="${GOPATH:-$HOME/go}"
+
+# PATH management (zsh array style)
+typeset -U path PATH
+path=(
+  "$HOME/.local/bin"
+  "$GOPATH/bin"
+  $path
+)
+export PATH

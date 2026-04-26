@@ -1,0 +1,68 @@
+# Powerlevel10k instant prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Core shell options
+setopt INC_APPEND_HISTORY SHARE_HISTORY HIST_IGNORE_DUPS
+
+# Ensure cache/state dirs exist
+mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh" "${XDG_STATE_HOME:-$HOME/.local/state}/zsh" >/dev/null 2>&1
+
+# Prompt
+[[ -r "$ZDOTDIR/.p10k.zsh" ]] && source "$ZDOTDIR/.p10k.zsh"
+[[ -r "${XDG_DATA_HOME:-$HOME/.local/share}/powerlevel10k/powerlevel10k.zsh-theme" ]] && \
+  source "${XDG_DATA_HOME:-$HOME/.local/share}/powerlevel10k/powerlevel10k.zsh-theme"
+
+# Sheldon
+if command -v sheldon >/dev/null 2>&1; then
+  eval "$(sheldon source)"
+fi
+
+# Completion
+autoload -U compinit
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-${ZSH_VERSION}"
+
+# fzf integration
+[[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
+
+# Aliases and helpers
+# Repository root
+export REPO_ROOT="$HOME/src"
+
+# cd to repository selected by fzf
+cdr() {
+  local dir
+
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fzf is not installed"
+    return 1
+  fi
+
+  if [[ ! -d "$REPO_ROOT" ]]; then
+    echo "REPO_ROOT does not exist: $REPO_ROOT"
+    return 1
+  fi
+
+  dir=$(
+    find "$REPO_ROOT" -mindepth 4 -maxdepth 4 -type d -name .git -prune 2>/dev/null \
+      | sed 's#/.git$##' \
+      | fzf --prompt='repo> '
+  ) || return
+
+  [[ -n "$dir" ]] && cd "$dir"
+}
+# vim
+alias vim='vim -u "$XDG_CONFIG_HOME/vim/vimrc"'
+fda() {
+  local d
+  d=$(find "${1:-.}" -type d 2>/dev/null | fzf +m) && cd "$d"
+}
+
+# mise
+if [[ -x "$HOME/.local/bin/mise" ]]; then
+  eval "$("$HOME/.local/bin/mise" activate zsh)"
+elif command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
+
